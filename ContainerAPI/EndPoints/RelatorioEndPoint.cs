@@ -1,4 +1,6 @@
-﻿using ContainerAPI.Models;
+﻿using AutoMapper;
+using ContainerAPI.ItemView;
+using ContainerAPI.Models;
 using ContainerAPI.Repositorys;
 
 namespace ContainerAPI.EndPoints
@@ -7,10 +9,11 @@ namespace ContainerAPI.EndPoints
     {
         public static void MapRelatorioEndPoint(this WebApplication ep)
         {
-            ep.MapGet("/Relatorio/pegarumRelatorio", async (IRelatorioRepository _repository) =>
+            ep.MapGet("/Relatorio/pegarumRelatorio", async (IRelatorioRepository _repository, IMapper _mapper) =>
             {
                 var relatorio = await _repository.GetByMovimentacao();
-                return relatorio;
+                var relatorioView = _mapper.Map<List<ContainerItemView>>(relatorio);
+                return relatorioView;
             })
             .Produces<List<Container>>(StatusCodes.Status200OK)
             .WithName("PegarRelatorios")

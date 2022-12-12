@@ -1,4 +1,6 @@
-﻿using ContainerAPI.Models;
+﻿using AutoMapper;
+using ContainerAPI.ItemView;
+using ContainerAPI.Models;
 using ContainerAPI.Repositorys;
 
 namespace ContainerAPI.EndPoints;
@@ -7,36 +9,43 @@ public static class MovimentacaoEndPoint
 {
     public static void MapMovimentacaoEndPoint(this WebApplication ep)
     {
-        ep.MapPost("/movimentacao/cadastrarMovimentacao", async (Movimentacao movimentacao, IMovimentacaoRepository _repository) =>
+        ep.MapPost("/movimentacao/cadastrarMovimentacao", async (MovimentacaoItemView movimentacaoitemview, IMovimentacaoRepository _repository, IMapper _mapper) =>
         {
+            var movimentacao = _mapper.Map<Movimentacao>(movimentacaoitemview);
             await _repository.Post(movimentacao);
-            return Results.Created($"/cadastrarMovimentacao/{movimentacao.movimentacaoId}", movimentacao);
+
+            var movimentacoes = _mapper.Map<MovimentacaoItemView>(movimentacao);
+
+            return Results.Created($"/cadastrarMovimentacao/{movimentacao.movimentacaoId}", movimentacoes);
         })
             .Produces<Movimentacao>(StatusCodes.Status201Created)
             .WithName("CriarUmNovoMovimentacao")
             .WithTags("Movimentacao");
 
-        ep.MapGet("/movimentacao/pegartodosMovimentacao", async (IMovimentacaoRepository _repository) =>
+        ep.MapGet("/movimentacao/pegartodosMovimentacao", async (IMovimentacaoRepository _repository, IMapper _mapper) =>
         {
             var movimentacao = await _repository.GetAll();
-            return movimentacao;
+            var movimentacaoView = _mapper.Map<List<MovimentacaoItemView>>(movimentacao);
+            return movimentacaoView;
         })
             .Produces<List<Movimentacao>>(StatusCodes.Status200OK)
             .WithName("PegarTodosMovimentacao")
             .WithTags("Movimentacao");
 
-        ep.MapGet("/movimentacao/pegarpeloIdMovimentacao/{Id:int}", async (int Id, IMovimentacaoRepository _repository) =>
+        ep.MapGet("/movimentacao/pegarpeloIdMovimentacao/{Id:int}", async (int Id, IMovimentacaoRepository _repository, IMapper _mapper) =>
         {
             var movimentacao = await _repository.GetById(x => x.movimentacaoId == Id);
-            return movimentacao;
+            var movimentacaoView = _mapper.Map<MovimentacaoItemView>(movimentacao);
+            return movimentacaoView;
         })
             .Produces<Movimentacao>(StatusCodes.Status200OK)
             .Produces<Movimentacao>(StatusCodes.Status404NotFound)
             .WithName("PegarMovimentacaoPeloId")
             .WithTags("Movimentacao");
 
-        ep.MapPut("/movimentacao/atualizarMovimentacao/{Id:int}", (int Id, Movimentacao movimentacao, IMovimentacaoRepository _repository) =>
+        ep.MapPut("/movimentacao/atualizarMovimentacao/{Id:int}", (int Id, MovimentacaoItemView movimentacaoitemview, IMovimentacaoRepository _repository, IMapper _mapper) =>
         {
+            var movimentacao = _mapper.Map<Movimentacao>(movimentacaoitemview);
             _repository.Put(movimentacao);
             return Results.Ok(movimentacao);
         })
@@ -45,7 +54,7 @@ public static class MovimentacaoEndPoint
             .WithName("AtualizarMovimentacao")
             .WithTags("Movimentacao");
 
-        ep.MapDelete("/movimentacao/deletarMovimentacao/{Id:int}", async (int Id, IMovimentacaoRepository _repository) =>
+        ep.MapDelete("/movimentacao/deletarMovimentacao/{Id:int}", async (int Id, IMovimentacaoRepository _repository, IMapper _mapper) =>
         {
             var delete = await _repository.GetById(x => x.movimentacaoId == Id);
 
@@ -55,7 +64,10 @@ public static class MovimentacaoEndPoint
             }
 
             _repository.Delete(delete);
-            return Results.Ok(delete);
+
+            var movimentacaoitemview = _mapper.Map<MovimentacaoItemView>(delete);
+
+            return Results.Ok(movimentacaoitemview);
         })
             .Produces<Movimentacao>(StatusCodes.Status200OK)
             .Produces<Movimentacao>(StatusCodes.Status404NotFound)

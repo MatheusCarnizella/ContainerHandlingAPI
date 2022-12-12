@@ -11,8 +11,5 @@ public class Container
     public bool containerStatusVazio { get; set; }
     public string? containerCategoria { get; set; }
 
-    [JsonIgnore]
-    public int movimentacaoId { get; set; }
-
     public ICollection<Movimentacao>? Movimentacao { get; set; }
 }

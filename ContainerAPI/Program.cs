@@ -1,5 +1,7 @@
+using AutoMapper;
 using ContainerAPI.Context;
 using ContainerAPI.EndPoints;
+using ContainerAPI.Mappings;
 using ContainerAPI.Repositorys;
 using ContainerAPI.Repositorys.Implementations;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +19,14 @@ builder.Services.AddDbContext<ContextoDaAPI>(options =>
 builder.Services.AddScoped<IContainerRepository, ContainerRepository>();
 builder.Services.AddScoped<IMovimentacaoRepository, MovimentacaoRepository>();
 builder.Services.AddScoped<IRelatorioRepository, RelatorioRepository>();
+
+var mappingConfig = new MapperConfiguration(mc =>
+{
+    mc.AddProfile(new MappingResource());
+});
+
+IMapper mapper = mappingConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
 
 var app = builder.Build();
 
