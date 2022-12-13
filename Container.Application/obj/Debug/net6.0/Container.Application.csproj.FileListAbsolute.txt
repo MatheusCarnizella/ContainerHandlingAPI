@@ -1,0 +1,15 @@
+C:\Users\mathe\source\repos\ContainerHandlingAPI\Container.Application\bin\Debug\net6.0\Container.Application.deps.json
+C:\Users\mathe\source\repos\ContainerHandlingAPI\Container.Application\bin\Debug\net6.0\Container.Application.dll
+C:\Users\mathe\source\repos\ContainerHandlingAPI\Container.Application\bin\Debug\net6.0\Container.Application.pdb
+C:\Users\mathe\source\repos\ContainerHandlingAPI\Container.Application\bin\Debug\net6.0\Container.Domain.dll
+C:\Users\mathe\source\repos\ContainerHandlingAPI\Container.Application\bin\Debug\net6.0\Container.Domain.pdb
+C:\Users\mathe\source\repos\ContainerHandlingAPI\Container.Application\obj\Debug\net6.0\Container.Application.csproj.AssemblyReference.cache
+C:\Users\mathe\source\repos\ContainerHandlingAPI\Container.Application\obj\Debug\net6.0\Container.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mathe\source\repos\ContainerHandlingAPI\Container.Application\obj\Debug\net6.0\Container.Application.AssemblyInfoInputs.cache
+C:\Users\mathe\source\repos\ContainerHandlingAPI\Container.Application\obj\Debug\net6.0\Container.Application.AssemblyInfo.cs
+C:\Users\mathe\source\repos\ContainerHandlingAPI\Container.Application\obj\Debug\net6.0\Container.Application.csproj.CoreCompileInputs.cache
+C:\Users\mathe\source\repos\ContainerHandlingAPI\Container.Application\obj\Debug\net6.0\Container.Application.csproj.CopyComplete
+C:\Users\mathe\source\repos\ContainerHandlingAPI\Container.Application\obj\Debug\net6.0\Container.Application.dll
+C:\Users\mathe\source\repos\ContainerHandlingAPI\Container.Application\obj\Debug\net6.0\refint\Container.Application.dll
+C:\Users\mathe\source\repos\ContainerHandlingAPI\Container.Application\obj\Debug\net6.0\Container.Application.pdb
+C:\Users\mathe\source\repos\ContainerHandlingAPI\Container.Application\obj\Debug\net6.0\ref\Container.Application.dll
